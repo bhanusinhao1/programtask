@@ -1,0 +1,33 @@
+<html>
+<head>
+<title>User Data Entry Portal</title>
+<body bgcolor="#995481">
+<form id="form1">
+  <label><h1>Desired Input:</h1></label>
+  <input id="input" required>
+  <br />
+  <button>Submit</button>
+</form>
+<script>
+document.getElementById("form1").addEventListener("submit", event => 
+{
+  event.preventDefault();
+
+  const link = document.createElement("a");
+  link.download = 'form1.txt';
+  link.href = window.URL.createObjectURL(
+    new Blob([ [
+      document.getElementById("input").value,
+    ].join('\n') ],
+    { type: 'text/plain' })
+  );
+  link.style.display = "none";
+  document.body.appendChild(link);
+
+  link.click();
+  link.remove();
+});
+
+</script>
+</body>
+</html>
